@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Bubblebox</title>
+<link href="http://www.laonan.net/media/Bubblebox1.0/css/jQuery.Bubblebox.1.0.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="http://www.laonan.net/static/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.laonan.net/media/Bubblebox1.0/js/jQuery.Bubblebox.1.0.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.mystyle').Bubblebox({
+			boxWidth:350,
+			boxHeight:280,
+			loadingImg:'http://www.laonan.net/media/Bubblebox1.0/images/loading.gif'
+		});
+	});
+</script>
+</head>
+<body>
+	<div style="text-align:center;">
+		<a class="mystyle" href="#thisPageContent">inline content in the page</a>
+	</div>
+	<div>
+		<a href="http://www.laonan.net/media/Bubblebox1.0/tbl.html?kk=kk&bubblebox_type=iframe" class="mystyle">iframe content</a>
+	</div>
+	<div style="text-align:right; padding-right:300px;">
+		<a href="http://www.laonan.net/media/Bubblebox1.0/ajax.html?uu=uu&bubblebox_type=ajax" class="mystyle">ajax content</a>
+	</div>
+	
+	<div id="thisPageContent" style="display:none;"><h1>hello beauty!</h1></div>
+</body>
+</html>
