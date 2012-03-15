@@ -19,7 +19,8 @@
 				offsetX : 0,
 				boxWidth : 120,
 				boxHeight : 120,
-				loadingImg : '../images/loading.gif'
+				loadingImg : '../images/loading.gif',
+				closeImg: '../images/close.gif'
 		};
 		var options = $.extend(defaults, options);
 		
@@ -33,7 +34,7 @@
 				$('#Bubblebox-div').remove();
 				
 				var bobbleBox_html = '<div id="Bubblebox-div">';
-				bobbleBox_html += '<div class="Bubblebox-header"><a href="javascript:void(0);">Close</a></div>';
+				bobbleBox_html += '<div class="Bubblebox-header"><a href="javascript:void(0);"><img src="' + options.closeImg + '"</a></div>';
 				bobbleBox_html += '<div class="bubblebox-loading"><img src="' + options.loadingImg + '" /></div>';
 				bobbleBox_html += '<div class="bubblebox-content">';
 				bobbleBox_html += '</div>';
@@ -41,7 +42,7 @@
 				
 				$('body').append(bobbleBox_html);
 				$('#Bubblebox-div').attr('style', 'top:' + topY + 'px;left:' + leftX + 'px;width:' + options.boxWidth + 'px;height:' + options.boxHeight + 'px;');
-				$('.bubblebox-loading').attr('style', 'margin-top:' + (options.boxHeight/2 - 40) + 'px;')
+				$('.bubblebox-loading').attr('style', 'margin-top:' + (options.boxHeight/2 - 40) + 'px;');
 				
 				var bobbleBox = $('#Bubblebox-div');
 		    	//drag layer
@@ -76,7 +77,7 @@
 				var urlNoQuery = url.split('bubblebox_type=')[0];
 				
 				if(params['bubblebox_type'] == 'iframe') {
-					var iframe_html = '<iframe frameborder="0" hspace="0" src="' +urlNoQuery+'" id="Bubblebox_iframeContent" name="Bubblebox_iframeContent'+Math.round(Math.random()*1000)+'" style="width:'+options.boxWidth+'px;height:'+(options.boxHeight-30)+'px;display:none;" > </iframe>';
+					var iframe_html = '<iframe frameborder="0" hspace="0" src="' +urlNoQuery+'" id="Bubblebox_iframeContent" name="Bubblebox_iframeContent'+Math.round(Math.random()*1000)+'" style="width:'+(options.boxWidth-20)+'px;height:'+(options.boxHeight-20)+'px;display:none;" > </iframe>';
 					$('.bubblebox-content').append(iframe_html);
 					$('#Bubblebox_iframeContent').load(function(){ 
 						$('.bubblebox-loading').remove();

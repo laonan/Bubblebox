@@ -6,4 +6,5 @@
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080');
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080')";}
 #Bubblebox-div .bubblebox-loading {text-align:center;}
-#Bubblebox-div .Bubblebox-header a {width:14px;height:14px;text-indent:-99999px;float:right;display:block;background:url(../images/close.gif) no-repeat center;overflow:hidden;}
+#Bubblebox-div .Bubblebox-header a {width:14px;height:14px;float:right;display:block;overflow:hidden;}
+#Bubblebox_iframeContent {margin-top:18px;}
