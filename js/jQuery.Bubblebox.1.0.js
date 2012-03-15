@@ -34,7 +34,7 @@
 				$('#Bubblebox-div').remove();
 				
 				var bobbleBox_html = '<div id="Bubblebox-div">';
-				bobbleBox_html += '<div class="Bubblebox-header"><a href="javascript:void(0);"><img src="' + options.closeImg + '"</a></div>';
+				bobbleBox_html += '<div class="Bubblebox-header"><a href="javascript:void(0);"><img src="' + options.closeImg + '" /></a></div>';
 				bobbleBox_html += '<div class="bubblebox-loading"><img src="' + options.loadingImg + '" /></div>';
 				bobbleBox_html += '<div class="bubblebox-content">';
 				bobbleBox_html += '</div>';
