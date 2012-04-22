@@ -1,5 +1,5 @@
 /*
- * BubbleBox 1.0 - One tooltips can be dragged and can be filled content with inline html, iframe or ajax.
+ * BubbleBox 1.1 - One drop-down panel can be dragged and can be filled content with inline html, iframe or ajax.
  * By laonan (http://www.laonan.net)
  * The function which is named as "bb_tb_parseQuery" comes from thickbox3.1 by Cody Lindley (http://www.codylindley.com)
  * Copyright (c) 2012 laonan
@@ -15,12 +15,13 @@
 	$.fn.Bubblebox = function(options){
 		
 		var defaults = {
-				offsetY : 4,
-				offsetX : 0,
-				boxWidth : 120,
-				boxHeight : 120,
-				loadingImg : '../images/loading.gif',
-				closeImg: '../images/close.gif'
+		    offsetY : 4,
+			offsetX : 0,
+			boxWidth : 120,
+			boxHeight : 120,
+			loadingImg : '../images/loading.gif',
+			closeImg: '../images/close.gif',
+            dragged: true
 		};
 		var options = $.extend(defaults, options);
 		
@@ -41,31 +42,37 @@
 				bobbleBox_html += '</div>';
 				
 				$('body').append(bobbleBox_html);
-				$('#Bubblebox-div').attr('style', 'top:' + topY + 'px;left:' + leftX + 'px;width:' + options.boxWidth + 'px;height:' + options.boxHeight + 'px;');
-				$('.bubblebox-loading').attr('style', 'margin-top:' + (options.boxHeight/2 - 40) + 'px;');
+                var bStyle = 'top:' + topY + 'px;left:' + leftX + 'px;width:' + options.boxWidth + 'px;height:' + options.boxHeight + 'px;';
+                if(options.dragged) {
+                    bStyle += 'cursor:move;';
+                }
+                $('#Bubblebox-div').attr('style', bStyle);
+                $('.bubblebox-loading').attr('style', 'margin-top:' + (options.boxHeight/2 - 40) + 'px;');
 				
 				var bobbleBox = $('#Bubblebox-div');
-		    	//drag layer
-		    	var _move=false;
-		    	var _x,_y;
-		        $(bobbleBox).click(function(){
-		            }).mousedown(function(e){
-		            _move=true;
-		            _x=e.pageX-parseInt($(bobbleBox).css('left'));
-		            _y=e.pageY-parseInt($(bobbleBox).css('top'));
-		            $(bobbleBox).fadeTo(20, 0.5);
-		        });
-		        
-		        $(document).mousemove(function(e){
-			            if(_move){
-			                var x=e.pageX-_x;
-			                var y=e.pageY-_y;
-			                $(bobbleBox).css({top:y,left:x});
-			            }
-		        	}).mouseup(function(){
-				        _move=false;
-				        $(bobbleBox).fadeTo('fast', 1);
-		        });
+		    	if(options.dragged) {
+                    //drag layer
+                    var _move=false;
+                    var _x,_y;
+                    $(bobbleBox).click(function(){
+                        }).mousedown(function(e){
+                        _move=true;
+                        _x=e.pageX-parseInt($(bobbleBox).css('left'));
+                        _y=e.pageY-parseInt($(bobbleBox).css('top'));
+                        $(bobbleBox).fadeTo(20, 0.5);
+                    });
+
+                    $(document).mousemove(function(e){
+                            if(_move){
+                                var x=e.pageX-_x;
+                                var y=e.pageY-_y;
+                                $(bobbleBox).css({top:y,left:x});
+                            }
+                        }).mouseup(function(){
+                            _move=false;
+                            $(bobbleBox).fadeTo('fast', 1);
+                    });
+                }
 		        
 		        $(bobbleBox.find('.Bubblebox-header a')).click(function(){
 		        	$(bobbleBox).hide();
@@ -77,7 +84,7 @@
 				var urlNoQuery = url.split('bubblebox_type=')[0];
 				
 				if(params['bubblebox_type'] == 'iframe') {
-					var iframe_html = '<iframe frameborder="0" hspace="0" src="' +urlNoQuery+'" id="Bubblebox_iframeContent" name="Bubblebox_iframeContent'+Math.round(Math.random()*1000)+'" style="width:'+(options.boxWidth-20)+'px;height:'+(options.boxHeight-20)+'px;display:none;" > </iframe>';
+					var iframe_html = '<iframe frameborder="0" hspace="0" src="' +urlNoQuery+'" id="Bubblebox_iframeContent" name="Bubblebox_iframeContent'+Math.round(Math.random()*1000)+'" style="width:'+(options.boxWidth-20)+'px;height:'+(options.boxHeight-20)+'px;display:none;" ></iframe>';
 					$('.bubblebox-content').append(iframe_html);
 					$('#Bubblebox_iframeContent').load(function(){ 
 						$('.bubblebox-loading').remove();
@@ -125,8 +132,8 @@
 	   for ( var i = 0; i < Pairs.length; i++ ) {
 	      var KeyVal = Pairs[i].split('=');
 	      if ( ! KeyVal || KeyVal.length != 2 ) {continue;}
-	      var key = unescape( KeyVal[0] );
-	      var val = unescape( KeyVal[1] );
+	      var key = decodeURI( KeyVal[0] );
+	      var val = decodeURI( KeyVal[1] );
 	      val = val.replace(/\+/g, ' ');
 	      Params[key] = val;
 	   }
