@@ -114,17 +114,15 @@
                         });
                     }
                     else {
-                        //html in this page
+                        //html in this page, in ie8, this url sometimes is auto completed like 'http://www.domain.com/#yourid'
+                        url_arr = url.split('#');
+                        if(url_arr.length > 1)
+                            url = '#' + url_arr[1]
+
                         $('.bubblebox-loading').remove();
                         $('.bubblebox-content').append($(url).html());
                     }
 
-                    return false;
-                });
-
-
-                $('.bubblebox-content ul').live('li','click',function() {
-                    alert('Thank you for clicking');
                     return false;
                 });
 
