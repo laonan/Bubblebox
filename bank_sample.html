@@ -8,69 +8,62 @@
         #banklist{display: none;}
 
         .banklist {list-style: none; margin-left: -20px;}
-        .banklist li {float:left; margin: 4px;}
+        .banklist li {float:left; margin: 4px; border: #cccccc 1px solid;}
+        .bankConfirmBtn {text-align: center;border-top: #cccccc 1px solid;padding: 8px; margin-top: 16px;}
+        .bankConfirmBtn input{color: #FF3602;cursor: pointer; border: 1px solid #aaa; background-color:#ffffff;}
     </style>
     <script src="http://sss.baostar.com/ss/EF/jQuery/jquery.js" type="text/javascript"></script>
     <script src="js/jQuery.Bubblebox.1.1.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.showBanks').Bubblebox({
-                boxWidth:570,
-                boxHeight:210,
+                boxWidth:222,
+                boxHeight:140,
                 loadingImg:'images/loading.gif',
                 closeImg: 'images/close.gif',
                 dragged: false
             });
-        });
 
-        function selectBank(bankCode) {
-            if(bankCode == 'hxb') {
-                alert('您选择了华夏银行！');
-                $('#Bubblebox-div').hide();
-            }
-        }
+            $('.showBanks').click(function(){
+                $('#txtSelectedBank').val('');
+            });
+
+            $('.banklist li').live('click', function(){
+                $('.banklist li').attr('style', 'border: #cccccc 1px solid;');
+                $(this).attr('style', 'border: #15ABFF 1px solid;');
+                $('#txtSelectedBank').val($(this).attr('id'));
+            });
+
+            $('.bankConfirmBtn input').live('click', function(){
+                //这里放你的逻辑代码 blablabla
+                var bankCode = $('#txtSelectedBank').val();
+                if(bankCode != '' ) {
+                    alert( bankCode);
+
+                    //关闭Bubblebox
+                    $('.showBanks').Bubblebox('close');
+                } else {
+                    alert('请选择一家银行！')
+                }
+            });
+        });
     </script>
 </head>
 <body>
 <a class="showBanks" href="#banklist">请选择银行</a>
 <div id="banklist">
     <ul class="banklist">
-        <li>
-            <a onclick="selectBank('hxb')" href="javascript:void(0);">
-               <img src="images/banks/hxb.gif" alt="华夏银行">
-            </a>
-        </li>
-        <li>
+        <li id="HXB">
             <a href="javascript:void(0);">
-                <img src="images/banks/20060713191624124.gif" alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <img src="images/banks/20060713191624149.gif" alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <img src="images/banks/20060713191624232.gif" alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <img src="images/banks/20060713191624295.gif" alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <img src="images/banks/20060713191624306.gif" alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <img src="images/banks/20060713191624438.gif" alt="">
+               <img src="images/banks/hxb.png" alt="华夏银行">
             </a>
         </li>
     </ul>
+    <div style="clear: both;"></div>
+    <div class="bankConfirmBtn">
+        <input type="button" value="  确  认  " />
+    </div>
+    <input type="hidden" id="txtSelectedBank" />
 </div>
 </body>
 </html>
